@@ -1,0 +1,799 @@
+Here is an HTML document that creates a modern educational platform for A/L Science papers with all the features you requested.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>SJPEPARS | A/L Science Papers Hub</title>
+    <!-- Font Awesome 6 (free icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Inter for modern SaaS feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.25s ease, color 0.2s ease;
+            scroll-behavior: smooth;
+        }
+
+        /* Light theme (default) */
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --border: #e2e8f0;
+            --accent: #3b82f6;
+            --accent-dark: #2563eb;
+            --accent-soft: #eff6ff;
+            --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 20px 25px -12px rgba(0, 0, 0, 0.08);
+            --footer-bg: #f1f5f9;
+        }
+
+        body.dark {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --border: #334155;
+            --accent: #60a5fa;
+            --accent-dark: #3b82f6;
+            --accent-soft: #1e293b;
+            --footer-bg: #0f172a;
+        }
+
+        /* Utility */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 4rem 0;
+        }
+
+        /* header + nav */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 0;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), #8b5cf6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1.2rem;
+            align-items: center;
+        }
+
+        .theme-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 3rem;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: 0.2s;
+            color: var(--text-primary);
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-soft);
+        }
+
+        /* hero */
+        .hero {
+            text-align: center;
+            padding: 3rem 0 2rem 0;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent));
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .search-bar {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-bar i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border-radius: 60px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-size: 1rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+        }
+
+        /* subject cards */
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .subjects-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .subject-card {
+            flex: 1 1 200px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .subject-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent);
+            box-shadow: var(--shadow-md);
+        }
+
+        .subject-card i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .subject-card h3 {
+            font-weight: 600;
+        }
+
+        /* filter row */
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-group select, .filter-group button {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 0.6rem 1.2rem;
+            border-radius: 2rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .filter-group select:focus, .filter-group button:hover {
+            border-color: var(--accent);
+        }
+
+        .reset-btn {
+            background: var(--accent-soft);
+            color: var(--accent-dark);
+        }
+
+        /* papers grid */
+        .papers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .paper-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 1.25rem;
+            padding: 1.25rem;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .paper-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .paper-year {
+            font-weight: 700;
+            font-size: 1.1rem;
+            background: var(--accent-soft);
+            display: inline-block;
+            width: fit-content;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            color: var(--accent-dark);
+        }
+
+        .paper-subject {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .download-btn {
+            background: none;
+            border: none;
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+        }
+
+        .download-btn:hover {
+            background: var(--accent-dark);
+            transform: scale(0.97);
+        }
+
+        /* popup animation (toast) */
+        .toast-popup {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--accent-dark);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 500;
+            z-index: 1000;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            pointer-events: none;
+        }
+
+        .toast-popup.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* upload section */
+        .upload-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .upload-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.2s;
+        }
+
+        .upload-btn:hover {
+            background: var(--accent-dark);
+        }
+
+        /* footer */
+        footer {
+            background: var(--footer-bg);
+            border-top: 1px solid var(--border);
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .social-icons a {
+            color: var(--text-secondary);
+            font-size: 1.4rem;
+            margin-left: 1rem;
+            transition: 0.2s;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent);
+        }
+
+        .contact-email {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.2rem;
+            }
+            .hero h2 {
+                font-size: 2rem;
+            }
+            .papers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- NAVBAR with theme toggle -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1>SJPEPARS</h1>
+        </div>
+        <div class="nav-actions">
+            <div class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>SJPEPARS – A/L Science Papers Hub</h2>
+        <p>Download, practice and succeed in your A/L exams</p>
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchPapers" placeholder="Search papers by subject, year or name...">
+        </div>
+    </section>
+
+    <!-- Subject Cards (quick filter) -->
+    <section style="padding-top: 0;">
+        <div class="section-title">
+            <i class="fas fa-book-open"></i> 
+            <span>Subjects</span>
+        </div>
+        <div class="subjects-grid" id="subjectsContainer">
+            <!-- dynamic generation JS but static inner will be replaced? We'll generate via js to handle filtering -->
+        </div>
+    </section>
+
+    <!-- Papers Section with filters -->
+    <section>
+        <div class="section-title">
+            <i class="fas fa-file-alt"></i>
+            <span>Exam Papers</span>
+        </div>
+        <div class="filters">
+            <div class="filter-group">
+                <select id="filterSubject">
+                    <option value="all">All Subjects</option>
+                    <option value="Physics">Physics</option>
+                    <option value="Chemistry">Chemistry</option>
+                    <option value="Biology">Biology</option>
+                    <option value="Combined Maths">Combined Maths</option>
+                </select>
+                <select id="filterYear">
+                    <option value="all">All Years</option>
+                </select>
+                <button id="resetFilters" class="reset-btn">Reset Filters</button>
+            </div>
+        </div>
+        <div id="papersGrid" class="papers-grid">
+            <!-- papers injected via JS -->
+        </div>
+        <div id="noPapersMsg" style="text-align: center; padding: 2rem; color: var(--text-secondary); display: none;">No papers match your criteria.</div>
+    </section>
+
+    <!-- Upload Page (Simple UI only) -->
+    <section id="upload">
+        <div class="section-title">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <span>Contribute Paper</span>
+        </div>
+        <div class="upload-card">
+            <form id="uploadForm">
+                <div class="form-group">
+                    <label>Paper Name</label>
+                    <input type="text" placeholder="e.g., 2022 Physics Paper" id="paperName">
+                </div>
+                <div class="form-group">
+                    <label>Subject</label>
+                    <select id="paperSubject">
+                        <option>Physics</option>
+                        <option>Chemistry</option>
+                        <option>Biology</option>
+                        <option>Combined Maths</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Year</label>
+                    <input type="text" placeholder="e.g., 2023" id="paperYear">
+                </div>
+                <button type="button" id="uploadBtnUI" class="upload-btn"><i class="fas fa-upload"></i> Upload (Demo)</button>
+            </form>
+            <p style="font-size: 0.8rem; margin-top: 1rem; text-align: center; color: var(--text-secondary);">* UI only — no backend, just a placeholder action</p>
+        </div>
+    </section>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div>© SJPEPARS 2026</div>
+            <div class="contact-email"><i class="fas fa-envelope"></i> support@sjpepars.lk</div>
+            <div class="social-icons">
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Popup animation toast -->
+<div id="downloadToast" class="toast-popup">📄 Download started (sample)</div>
+
+<script>
+    // ---------- DUMMY PAPERS DATA ----------
+    const dummyPapers = [
+        { id: 1, name: "Physics Paper - March", year: "2023", subject: "Physics", pdfLink: "#" },
+        { id: 2, name: "Physics Model Paper", year: "2022", subject: "Physics", pdfLink: "#" },
+        { id: 3, name: "Chemistry Past Paper", year: "2023", subject: "Chemistry", pdfLink: "#" },
+        { id: 4, name: "Chemistry Practical", year: "2021", subject: "Chemistry", pdfLink: "#" },
+        { id: 5, name: "Biology Structured", year: "2022", subject: "Biology", pdfLink: "#" },
+        { id: 6, name: "Biology Essay", year: "2023", subject: "Biology", pdfLink: "#" },
+        { id: 7, name: "Combined Maths Pure", year: "2023", subject: "Combined Maths", pdfLink: "#" },
+        { id: 8, name: "Combined Maths Applied", year: "2022", subject: "Combined Maths", pdfLink: "#" },
+        { id: 9, name: "Physics Advanced", year: "2024", subject: "Physics", pdfLink: "#" },
+        { id: 10, name: "Chemistry Organic", year: "2024", subject: "Chemistry", pdfLink: "#" },
+        { id: 11, name: "Biology Genetics", year: "2021", subject: "Biology", pdfLink: "#" },
+        { id: 12, name: "Combined Maths Statistics", year: "2020", subject: "Combined Maths", pdfLink: "#" }
+    ];
+
+    // Subjects array
+    const subjectsList = ["Physics", "Chemistry", "Biology", "Combined Maths"];
+
+    // Extract unique years for filter
+    function getUniqueYears(papers) {
+        const years = papers.map(p => p.year);
+        return [...new Set(years)].sort((a,b) => b - a);
+    }
+
+    // State for filters
+    let currentSubjectFilter = "all";
+    let currentYearFilter = "all";
+    let searchQuery = "";
+
+    // DOM elements
+    const papersGrid = document.getElementById("papersGrid");
+    const filterSubject = document.getElementById("filterSubject");
+    const filterYear = document.getElementById("filterYear");
+    const searchInput = document.getElementById("searchPapers");
+    const resetBtn = document.getElementById("resetFilters");
+    const noPapersMsg = document.getElementById("noPapersMsg");
+    const subjectsContainer = document.getElementById("subjectsContainer");
+
+    // render subjects cards + attach quick filter click
+    function renderSubjects() {
+        subjectsContainer.innerHTML = "";
+        subjectsList.forEach(sub => {
+            const card = document.createElement("div");
+            card.className = "subject-card";
+            let icon = "fa-flask";
+            if (sub === "Chemistry") icon = "fa-atom";
+            else if (sub === "Biology") icon = "fa-dna";
+            else if (sub === "Combined Maths") icon = "fa-calculator";
+            else icon = "fa-microscope";
+            card.innerHTML = `<i class="fas ${icon}"></i><h3>${sub}</h3>`;
+            card.addEventListener("click", () => {
+                // Quick filter on subject
+                filterSubject.value = sub;
+                currentSubjectFilter = sub;
+                updateFiltersAndRender();
+                // smooth scroll to papers
+                document.querySelector("#papersGrid").scrollIntoView({ behavior: "smooth", block: "start" });
+            });
+            subjectsContainer.appendChild(card);
+        });
+    }
+
+    // Populate year dropdown
+    function populateYearDropdown(papersData) {
+        const years = getUniqueYears(papersData);
+        filterYear.innerHTML = '<option value="all">All Years</option>';
+        years.forEach(year => {
+            const option = document.createElement("option");
+            option.value = year;
+            option.textContent = year;
+            filterYear.appendChild(option);
+        });
+    }
+
+    // Filter papers logic (subject, year, search)
+    function getFilteredPapers() {
+        let filtered = [...dummyPapers];
+        if (currentSubjectFilter !== "all") {
+            filtered = filtered.filter(p => p.subject === currentSubjectFilter);
+        }
+        if (currentYearFilter !== "all") {
+            filtered = filtered.filter(p => p.year === currentYearFilter);
+        }
+        if (searchQuery.trim() !== "") {
+            const lowerQuery = searchQuery.toLowerCase();
+            filtered = filtered.filter(p => 
+                p.name.toLowerCase().includes(lowerQuery) || 
+                p.subject.toLowerCase().includes(lowerQuery) || 
+                p.year.includes(lowerQuery)
+            );
+        }
+        return filtered;
+    }
+
+    // Show toast popup with animation for download
+    function showDownloadPopup(paperName) {
+        const toast = document.getElementById("downloadToast");
+        toast.textContent = `📥 Downloading: ${paperName} (sample)`;
+        toast.classList.add("show");
+        setTimeout(() => {
+            toast.classList.remove("show");
+        }, 2000);
+    }
+
+    // Render papers to grid
+    function renderPapers() {
+        const filtered = getFilteredPapers();
+        if (filtered.length === 0) {
+            papersGrid.style.display = "none";
+            noPapersMsg.style.display = "block";
+            return;
+        }
+        papersGrid.style.display = "grid";
+        noPapersMsg.style.display = "none";
+        papersGrid.innerHTML = "";
+        filtered.forEach(paper => {
+            const card = document.createElement("div");
+            card.className = "paper-card";
+            card.innerHTML = `
+                <div class="paper-info">
+                    <div class="paper-year">${paper.year}</div>
+                    <div class="paper-subject"><i class="fas fa-graduation-cap"></i> ${paper.subject}</div>
+                    <div class="paper-name" style="font-weight:500;">${paper.name}</div>
+                </div>
+                <button class="download-btn" data-id="${paper.id}" data-name="${paper.name}">
+                    <i class="fas fa-download"></i> Download
+                </button>
+            `;
+            const btn = card.querySelector(".download-btn");
+            btn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                // popup animation + dummy placeholder action
+                showDownloadPopup(paper.name);
+                // simulate download opening placeholder link (optional)
+                // we just show popup, but we can also open a new tab if needed (but dummy sample)
+                if (paper.pdfLink && paper.pdfLink !== "#") {
+                    window.open(paper.pdfLink, '_blank');
+                } else {
+                    console.log(`Demo: ${paper.name} PDF link placeholder`);
+                }
+            });
+            papersGrid.appendChild(card);
+        });
+    }
+
+    // update filters from dropdowns and search, then re-render
+    function updateFiltersAndRender() {
+        currentSubjectFilter = filterSubject.value;
+        currentYearFilter = filterYear.value;
+        renderPapers();
+    }
+
+    // handle search input with debouncing smooth
+    let debounceTimer;
+    function handleSearchInput() {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+            searchQuery = searchInput.value;
+            renderPapers();
+        }, 300);
+    }
+
+    function resetAllFilters() {
+        filterSubject.value = "all";
+        filterYear.value = "all";
+        searchInput.value = "";
+        currentSubjectFilter = "all";
+        currentYearFilter = "all";
+        searchQuery = "";
+        renderPapers();
+        // optional: smooth scroll
+    }
+
+    // ---------- DARK MODE TOGGLE ----------
+    const themeToggle = document.getElementById("themeToggle");
+    function initTheme() {
+        const savedTheme = localStorage.getItem("sjpepars-theme");
+        if (savedTheme === "dark") {
+            document.body.classList.add("dark");
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+            document.body.classList.remove("dark");
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+    }
+    function toggleTheme() {
+        if (document.body.classList.contains("dark")) {
+            document.body.classList.remove("dark");
+            localStorage.setItem("sjpepars-theme", "light");
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        } else {
+            document.body.classList.add("dark");
+            localStorage.setItem("sjpepars-theme", "dark");
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+    }
+    themeToggle.addEventListener("click", toggleTheme);
+
+    // Upload UI only: simple alert with dummy message (no backend)
+    const uploadBtnUI = document.getElementById("uploadBtnUI");
+    uploadBtnUI.addEventListener("click", () => {
+        const paperNameVal = document.getElementById("paperName").value.trim() || "Unnamed Paper";
+        const subjectVal = document.getElementById("paperSubject").value;
+        const yearVal = document.getElementById("paperYear").value.trim() || "2025";
+        if (!paperNameVal) {
+            showDownloadPopup("Please enter paper name (UI demo)");
+            return;
+        }
+        // Display a friendly popup that it's UI only
+        const toast = document.getElementById("downloadToast");
+        toast.textContent = `📄 Demo: "${paperNameVal}" (${subjectVal} ${yearVal}) would be uploaded.`;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 2200);
+        // optionally clear fields for better UX
+        document.getElementById("paperName").value = "";
+        document.getElementById("paperYear").value = "";
+    });
+
+    // SMOOTH SCROLLING for any anchor navigation (also subject card trigger already scroll)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if(href !== "#" && href !== "") {
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    });
+
+    // Event listeners for filters
+    filterSubject.addEventListener("change", updateFiltersAndRender);
+    filterYear.addEventListener("change", updateFiltersAndRender);
+    resetBtn.addEventListener("click", resetAllFilters);
+    searchInput.addEventListener("input", handleSearchInput);
+
+    // on window load, populate year dropdown (using dummyPapers initially) + render all
+    function init() {
+        renderSubjects();
+        populateYearDropdown(dummyPapers);
+        // set current filters from initial selects
+        currentSubjectFilter = filterSubject.value;
+        currentYearFilter = filterYear.value;
+        renderPapers();
+        initTheme();
+        // additional smooth scroll behavior for hero search does not require
+    }
+    init();
+
+    // optional: ensure that year dropdown updates if we ever added papers? but dummy static is fine.
+    // also ensure that when reset we sync year dropdown values (already populated)
+</script>
+</body>
+</html>
+```
